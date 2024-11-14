@@ -28,7 +28,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>Explore Meals</h1>
+      <h1>Explore Meals Recipes</h1>
       <SearchBar onSearch={handleSearch} />
       <MealList meals={meals} />
     </div>
