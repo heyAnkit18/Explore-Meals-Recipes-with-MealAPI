@@ -7,9 +7,9 @@ const App = () => {
   const [meals, setMeals] = useState([]);
   const [query, setQuery] = useState('');
 
-  const fetchMeals = async (query = '') => {
+  const fetchMeals = async (searchQuery = '') => {
     try {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`);
       const data = await response.json();
       setMeals(data.meals || []);
     } catch (error) {
@@ -18,17 +18,16 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchMeals(); 
-  }, []);
+    fetchMeals(query); 
+  }, [query]);  
 
   const handleSearch = (searchQuery) => {
     setQuery(searchQuery);
-    fetchMeals(searchQuery);
   };
 
   return (
     <div className="app">
-      <h1>Explore Meals Recipes</h1>
+      <h1>Explore Meals</h1>
       <SearchBar onSearch={handleSearch} />
       <MealList meals={meals} />
     </div>
@@ -36,4 +35,3 @@ const App = () => {
 };
 
 export default App;
-
