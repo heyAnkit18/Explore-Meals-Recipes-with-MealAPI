@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import SearchBar from './components/SearchBar';
 import MealList from './components/MealList';
-import MealDetails from './components/MealDetails';
 import './index.css';
 
 const App = () => {
   const [meals, setMeals] = useState([]);
-  const [selectedMeal, setSelectedMeal] = useState(null);
 
   const fetchRandomMeals = async () => {
     try {
-      const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
-      const data = await response.json();
-      setMeals([data.meals[0]]);
+      const mealData = [];
+      for (let i = 0; i < 4; i++) {  // Fetch 4 random meals for the homepage
+        const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+        const data = await response.json();
+        mealData.push(data.meals[0]);
+      }
+      setMeals(mealData);
     } catch (error) {
       console.error("Error fetching random meals:", error);
     }
@@ -24,9 +25,8 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>Food Recipe Project</h1>
-      <SearchBar onSearch={() => {}} />
-      {selectedMeal ? <MealDetails meal={selectedMeal} /> : <MealList meals={meals} />}
+      <h1>Explore Meals</h1>
+      <MealList meals={meals} />
     </div>
   );
 };
