@@ -18,7 +18,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchMeals(); // Fetch random meals initially
+    fetchMeals(); 
   }, []);
 
   const handleSearch = (searchQuery) => {
